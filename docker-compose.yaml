@@ -15,3 +15,11 @@ services:
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: moneycontrol
+  backend:
+    build: .
+    container_name: moneyapp
+    ports: 
+      - "8080:8080"
+    volumes:
+      - ./:/go/src
