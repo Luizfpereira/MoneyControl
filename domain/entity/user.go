@@ -7,3 +7,11 @@ type User struct {
 	Email    string `json:"email"`
 	Password string `json:"password"`
 }
+
+func NewUser() (*User, error) {
+	return nil, nil
+}
+
+func (u *User) Validate() error {
+	return nil
+}
