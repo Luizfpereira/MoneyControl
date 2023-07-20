@@ -7,7 +7,8 @@ import (
 )
 
 func Migrate(instance *gorm.DB) {
-	instance.AutoMigrate(&User{}, &Transaction{})
-	// inserir FK em transaction na migração
+	if err := instance.AutoMigrate(&User{}, &Transaction{}); err != nil {
+		log.Fatalln("Could not migrate models to database!")
+	}
 	log.Println("Database migration completed!")
 }

@@ -6,14 +6,6 @@ import (
 	"gorm.io/gorm"
 )
 
-type User struct {
-	gorm.Model
-	Name     string
-	LastName string
-	Email    string
-	Password string
-}
-
 type Transaction struct {
 	gorm.Model
 	Value       float64
@@ -21,4 +13,14 @@ type Transaction struct {
 	Category    string
 	Date        time.Time
 	UserID      uint
+}
+
+// definir tamanho de colunas e campos not null
+type User struct {
+	gorm.Model
+	Name         string
+	LastName     string
+	Email        string
+	Password     string
+	Transactions []Transaction
 }
