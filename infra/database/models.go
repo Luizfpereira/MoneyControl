@@ -8,9 +8,9 @@ import (
 
 type Transaction struct {
 	gorm.Model
-	Value       float64
-	Description string
-	Category    string
+	Value       float64 `gorm:"not null"`
+	Description string  `gorm:"size:500"`
+	Category    string  `gorm:"size:200"`
 	Date        time.Time
 	UserID      uint
 }
@@ -18,9 +18,9 @@ type Transaction struct {
 // definir tamanho de colunas e campos not null
 type User struct {
 	gorm.Model
-	Name         string
-	LastName     string
-	Email        string
-	Password     string
+	Name         string `gorm:"size:200"`
+	LastName     string `gorm:"size:200"`
+	Email        string `gorm:"unique; not null"`
+	Password     string `gorm:"not null"`
 	Transactions []Transaction
 }
