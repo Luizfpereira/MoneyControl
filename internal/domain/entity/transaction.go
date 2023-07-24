@@ -22,13 +22,13 @@ func NewTransaction(value float64, description, category string, date time.Time,
 		Date:        date,
 		UserID:      userID,
 	}
-	if err := transaction.Validade(); err != nil {
+	if err := transaction.Validate(); err != nil {
 		return nil, err
 	}
 	return transaction, nil
 }
 
-func (t *Transaction) Validade() error {
+func (t *Transaction) Validate() error {
 	if t.UserID < 1 {
 		return errors.New("invalid user_id")
 	}
