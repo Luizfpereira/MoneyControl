@@ -80,3 +80,14 @@ func (t *TransactionUsecase) GetTransactionsPagination(limit, cursor int) ([]*Tr
 	}
 	return transactionOutputList, nil
 }
+
+func (t *TransactionUsecase) InsertTransactionCSV() error {
+	//receber nome do arquivo
+	//abrir arquivo csv
+	//tratar linha por linha e criar transactions para cada uma de acordo com as particularidades dos dados
+	// ler arquivo até o final
+	// usar goroutines de acordo com o numero de nucleos, passando o context WithCancel (definir tamanho do buffer)
+	// cada goroutine vai tratar o dado, criar uma transaction e enviar o dado por um canal
+	// um canal externo vai receber as transactions das goroutines e armazená-las em um slice que será inserido por batch
+	return nil
+}
