@@ -2,7 +2,6 @@ package repository
 
 import (
 	"MoneyControl/internal/domain/entity"
-	"fmt"
 
 	"gorm.io/gorm"
 )
@@ -19,7 +18,6 @@ func NewTransactionRepositoryPSQL(instance *gorm.DB) *TransactionRepositoryPSQL 
 
 func (r *TransactionRepositoryPSQL) CreateTransaction(t *entity.Transaction) (*entity.Transaction, error) {
 	record := r.Instance.Create(&t)
-	fmt.Println(record)
 	if record.Error != nil {
 		return nil, record.Error
 	}
@@ -27,6 +25,10 @@ func (r *TransactionRepositoryPSQL) CreateTransaction(t *entity.Transaction) (*e
 }
 
 func (r *TransactionRepositoryPSQL) ReadTransactionByID(id uint) (*entity.Transaction, error) {
+	return nil, nil
+}
+
+func (r *TransactionRepositoryPSQL) ReadTransactionsPagination(limit, cursos int) ([]*entity.Transaction, error) {
 	return nil, nil
 }
 
