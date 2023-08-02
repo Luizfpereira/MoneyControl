@@ -6,12 +6,13 @@ import (
 )
 
 var (
-	ErrInvalidUserID      = errors.New("invalid user_id")
-	ErrInvalidDescription = errors.New("invalid description")
-	ErrInvalidCategory    = errors.New("invalid category")
-	ErrInvalidDate        = errors.New("invalid date")
+	errInvalidUserID      = errors.New("invalid user_id")
+	errInvalidDescription = errors.New("invalid description")
+	errInvalidCategory    = errors.New("invalid category")
+	errInvalidDate        = errors.New("invalid date")
 )
 
+//Transaction defines a struct transaction made by a user
 type Transaction struct {
 	ID          uint      `json:"id"`
 	Value       float64   `json:"value"`
@@ -21,6 +22,7 @@ type Transaction struct {
 	UserID      uint      `json:"user_id"`
 }
 
+//NewTransaction 
 func NewTransaction(value float64, description, category string, date time.Time, userID uint) (*Transaction, error) {
 	transaction := &Transaction{
 		Value:       value,
@@ -37,19 +39,19 @@ func NewTransaction(value float64, description, category string, date time.Time,
 
 func (t *Transaction) Validate() error {
 	if t.UserID < 1 {
-		return ErrInvalidUserID
+		return errInvalidUserID
 	}
 
 	if t.Description == "" {
-		return ErrInvalidDescription
+		return errInvalidDescription
 	}
 
 	if t.Category == "" {
-		return ErrInvalidCategory
+		return errInvalidCategory
 	}
 
 	if t.Date.IsZero() {
-		return ErrInvalidDate
+		return errInvalidDate
 	}
 	return nil
 }

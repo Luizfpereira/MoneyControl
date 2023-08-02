@@ -12,6 +12,7 @@ func TestValidate(t *testing.T) {
 		err             error
 	}{
 		{
+			"testing userID = 0",
 			Transaction{
 				ID:          1,
 				Value:       12.6,
@@ -20,9 +21,10 @@ func TestValidate(t *testing.T) {
 				Date:        time.Now().UTC(),
 				UserID:      0,
 			},
-			ErrInvalidUserID,
+			errInvalidUserID,
 		},
 		{
+			"testing userID = 2",
 			Transaction{
 				ID:          1,
 				Value:       12.6,
@@ -31,7 +33,7 @@ func TestValidate(t *testing.T) {
 				Date:        time.Now().UTC(),
 				UserID:      2,
 			},
-			ErrInvalidUserID,
+			errInvalidUserID,
 		},
 	}
 

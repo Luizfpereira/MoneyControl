@@ -7,6 +7,7 @@ import (
 	"unicode"
 )
 
+// User defines an object of a user who will be responsible for the transactions in the application
 type User struct {
 	ID       string `json:"id"`
 	Name     string `json:"name"`
@@ -15,6 +16,8 @@ type User struct {
 	Password string `json:"password"`
 }
 
+// NewUser returns a User according to the name, last name, email and password passed to the function
+// or an error if invalid arguments are passed
 func NewUser(name, lastName, email, password string) (*User, error) {
 	user := &User{
 		Name:     name,
@@ -28,6 +31,7 @@ func NewUser(name, lastName, email, password string) (*User, error) {
 	return user, nil
 }
 
+// Validate verifies if the values used to create a User object are valid
 func (u *User) Validate() error {
 	if u.Name == "" {
 		return errors.New("name is empty")
