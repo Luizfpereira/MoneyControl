@@ -5,6 +5,13 @@ import (
 	"time"
 )
 
+var (
+	ErrInvalidUserID      = errors.New("invalid user_id")
+	ErrInvalidDescription = errors.New("invalid description")
+	ErrInvalidCategory    = errors.New("invalid category")
+	ErrInvalidDate        = errors.New("invalid date")
+)
+
 type Transaction struct {
 	ID          uint      `json:"id"`
 	Value       float64   `json:"value"`
@@ -30,19 +37,19 @@ func NewTransaction(value float64, description, category string, date time.Time,
 
 func (t *Transaction) Validate() error {
 	if t.UserID < 1 {
-		return errors.New("invalid user_id")
+		return ErrInvalidUserID
 	}
 
 	if t.Description == "" {
-		return errors.New("invalid description")
+		return ErrInvalidDescription
 	}
 
 	if t.Category == "" {
-		return errors.New("invalid description")
+		return ErrInvalidCategory
 	}
 
 	if t.Date.IsZero() {
-		return errors.New("invalid date")
+		return ErrInvalidDate
 	}
 	return nil
 }
