@@ -25,17 +25,27 @@ func (r *TransactionRepositoryPSQL) CreateTransaction(t *entity.Transaction) (*e
 }
 
 func (r *TransactionRepositoryPSQL) ReadTransactionByID(id uint) (*entity.Transaction, error) {
-	return nil, nil
+	var t *entity.Transaction
+	result := r.Instance.Find(&t, id)
+	if result.Error != nil {
+		return nil, result.Error
+	}
+	if err := t.Validate(); err != nil {
+		return nil, err
+	}
+	return t, nil
 }
 
-func (r *TransactionRepositoryPSQL) ReadTransactionsPagination(limit, cursos int) ([]*entity.Transaction, error) {
-	return nil, nil
-}
+func (r *TransactionRepositoryPSQL) UpdateTransactionByID(id uint, t *entity.Transaction) (*entity.Transaction, error) {
+	r.Instance.Update()
 
-func (r *TransactionRepositoryPSQL) UpdateTransactionByID(id uint) (*entity.Transaction, error) {
 	return nil, nil
 }
 
 func (r *TransactionRepositoryPSQL) DeleteTransactionByID(id uint) (uint, error) {
 	return 0, nil
+}
+
+func (r *TransactionRepositoryPSQL) ReadTransactionsPagination(limit, cursos int) ([]*entity.Transaction, error) {
+	return nil, nil
 }

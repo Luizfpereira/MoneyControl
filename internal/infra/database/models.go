@@ -24,3 +24,11 @@ type User struct {
 	Password     string `gorm:"not null"`
 	Transactions []Transaction
 }
+
+type Config struct {
+	DbName string
+}
+
+func (c *Config) Dsn() string {
+	return ""
+}
