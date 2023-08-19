@@ -14,12 +14,12 @@ func NewUserRepositoryPSQL(instance *gorm.DB) *UserRepositoryPSQL {
 	return &UserRepositoryPSQL{Instance: instance}
 }
 
-func (u *UserRepositoryPSQL) CreateUser(user *entity.User) (*entity.User, error) {
+func (u *UserRepositoryPSQL) CreateUser(user *entity.User) (uint, error) {
 	res := u.Instance.Create(&user)
 	if res.Error != nil {
-		return nil, res.Error
+		return 0, res.Error
 	}
-	return user, nil
+	return user.ID, nil
 }
 
 func (u *UserRepositoryPSQL) ReadUserByID(id int) (*entity.User, error) {
@@ -34,7 +34,7 @@ func (u *UserRepositoryPSQL) ReadUserByID(id int) (*entity.User, error) {
 	return user, nil
 }
 
-func (u *UserRepositoryPSQL) UpdateUserByID(user *entity.User) error {
+func (u *UserRepositoryPSQL) UpdateUser(user *entity.User) error {
 	res := u.Instance.UpdateColumns(user)
 	if res.Error != nil {
 		return res.Error

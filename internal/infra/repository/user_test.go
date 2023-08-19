@@ -32,26 +32,26 @@ func (s *UserRepoSuite) SetupTest() {
 	s.Assert().Nil(err)
 	s.Assert().Nil(u1.Validate())
 
-	createdUser1, err := repo.CreateUser(u1)
+	userID1, err := repo.CreateUser(u1)
 	s.Assert().Nil(err)
-	s.Assert().Equal(u1, createdUser1)
+	s.Assert().Equal(uint(1), userID1)
 
 	u2, err := entity.NewUser("Thais", "Montovani", "thais.montovani@gmail.com", "!Change456")
 	s.Assert().Nil(err)
 	s.Assert().Nil(u1.Validate())
 
-	createdUser2, err := repo.CreateUser(u2)
+	userID2, err := repo.CreateUser(u2)
 	s.Assert().Nil(err)
-	s.Assert().Equal(u2, createdUser2)
+	s.Assert().Equal(uint(2), userID2)
 }
 
 func (s *UserRepoSuite) TestCreateUser() {
 	u3, err := entity.NewUser("Shirley", "Pereira", "shirley.test@gmail.com", "*Mudar123456")
 	s.Assert().Nil(err)
 	s.Assert().Nil(u3.Validate())
-	res, err := s.repo.CreateUser(u3)
+	uID3, err := s.repo.CreateUser(u3)
 	s.Assert().Nil(err)
-	s.Assert().Equal(u3, res)
+	s.Assert().Equal(uint(3), uID3)
 }
 
 func (s *UserRepoSuite) TestReadUserByID() {
@@ -74,7 +74,7 @@ func (s *UserRepoSuite) TestUpdateUserByID() {
 	user1.Name = "Gabriel"
 	user1.Password = "*Chama789"
 
-	err = s.repo.UpdateUserByID(user1)
+	err = s.repo.UpdateUser(user1)
 	s.Assert().Nil(err)
 	updatedUser, err := s.repo.ReadUserByID(1)
 	s.Assert().Nil(err)

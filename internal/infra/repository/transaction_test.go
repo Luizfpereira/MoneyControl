@@ -73,7 +73,7 @@ func (s *TransactionRepoSuite) TestUpdateTransactionByIDValue() {
 
 	s.Suite.T().Run("Testing value update", func(ts *testing.T) {
 		t.Value = 5
-		err := repo.UpdateTransactionByID(1, t)
+		err := repo.UpdateTransactionByID(t)
 		s.Assert().Nil(err)
 		res, err := repo.ReadTransactionByID(1)
 		s.Assert().Nil(err)
@@ -85,7 +85,7 @@ func (s *TransactionRepoSuite) TestUpdateTransactionByIDValue() {
 		t.Category = "categoria update"
 		t.Date = time.Now().UTC()
 		t.UserID = 3
-		err := repo.UpdateTransactionByID(1, t)
+		err := repo.UpdateTransactionByID(t)
 		s.Assert().Nil(err)
 		res, err := repo.ReadTransactionByID(1)
 		s.Assert().Nil(err)

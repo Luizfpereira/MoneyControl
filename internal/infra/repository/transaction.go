@@ -36,7 +36,7 @@ func (r *TransactionRepositoryPSQL) ReadTransactionByID(id uint) (*entity.Transa
 	return t, nil
 }
 
-func (r *TransactionRepositoryPSQL) UpdateTransactionByID(id uint, t *entity.Transaction) error {
+func (r *TransactionRepositoryPSQL) UpdateTransactionByID(t *entity.Transaction) error {
 	res := r.Instance.UpdateColumns(&t)
 	if res.Error != nil {
 		return res.Error

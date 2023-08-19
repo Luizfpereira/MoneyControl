@@ -1,11 +1,10 @@
 package gateway
 
+import "MoneyControl/internal/domain/entity"
+
 type UserGateway interface {
-
+	CreateUser(user *entity.User) (uint, error)
+	ReadUserByID(id int) (*entity.User, error)
+	UpdateUser(user *entity.User) (*entity.User, error)
+	DeleteUserByID(id int) error
 }
-
-CreateTransaction(transaction *entity.Transaction) (*entity.Transaction, error)
-ReadTransactionByID(id uint) (*entity.Transaction, error)
-// ReadTransactionsPagination(limit, cursos int) ([]*entity.Transaction, error)
-UpdateTransactionByID(id uint) (*entity.Transaction, error)
-DeleteTransactionByID(id uint) (uint, error)
