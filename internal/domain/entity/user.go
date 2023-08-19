@@ -9,7 +9,7 @@ import (
 
 // User defines an object of a user who will be responsible for the transactions in the application
 type User struct {
-	ID       string `json:"id"`
+	ID       uint   `json:"id"`
 	Name     string `json:"name"`
 	LastName string `json:"last_name"`
 	Email    string `json:"email"`

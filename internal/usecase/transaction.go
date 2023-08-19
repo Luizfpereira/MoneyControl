@@ -69,17 +69,17 @@ func (t *TransactionUsecase) GetTransactionByID(id uint) (*TransactionOutputDTO,
 }
 
 // TODO: use pagination
-func (t *TransactionUsecase) GetTransactionsPagination(limit, cursor int) ([]*TransactionOutputDTO, error) {
-	transactionList, err := t.TransactionGateway.ReadTransactionsPagination(limit, cursor)
-	if err != nil {
-		return nil, fmt.Errorf("error retrieving all transactions: %v", err)
-	}
-	var transactionOutputList []*TransactionOutputDTO
-	for _, transactionRes := range transactionList {
-		transactionOutputList = append(transactionOutputList, toDTO(transactionRes))
-	}
-	return transactionOutputList, nil
-}
+// func (t *TransactionUsecase) GetTransactionsPagination(limit, cursor int) ([]*TransactionOutputDTO, error) {
+// 	transactionList, err := t.TransactionGateway.ReadTransactionsPagination(limit, cursor)
+// 	if err != nil {
+// 		return nil, fmt.Errorf("error retrieving all transactions: %v", err)
+// 	}
+// 	var transactionOutputList []*TransactionOutputDTO
+// 	for _, transactionRes := range transactionList {
+// 		transactionOutputList = append(transactionOutputList, toDTO(transactionRes))
+// 	}
+// 	return transactionOutputList, nil
+// }
 
 func (t *TransactionUsecase) InsertTransactionCSV() error {
 	//receber nome do arquivo

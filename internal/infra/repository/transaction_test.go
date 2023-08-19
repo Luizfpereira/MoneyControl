@@ -66,15 +66,39 @@ func (s *TransactionRepoSuite) TestReadTransactionByID() {
 	s.Assert().Equal(40.6, t.Value)
 }
 
-func (s *TransactionRepoSuite) TestUpdateTransactionByID() {
+func (s *TransactionRepoSuite) TestUpdateTransactionByIDValue() {
 	repo := NewTransactionRepositoryPSQL(s.db)
 	t, err := repo.ReadTransactionByID(1)
 	s.Assert().Nil(err)
-	t.Description = "update"
-	t.Value = 5
-	res, err := repo.UpdateTransactionByID(1, t)
+
+	s.Suite.T().Run("Testing value update", func(ts *testing.T) {
+		t.Value = 5
+		err := repo.UpdateTransactionByID(1, t)
+		s.Assert().Nil(err)
+		res, err := repo.ReadTransactionByID(1)
+		s.Assert().Nil(err)
+		s.Assert().Equal(t, res)
+	})
+
+	s.Suite.T().Run("Testing value, description, category, date, userID update", func(ts *testing.T) {
+		t.Value = 550.6
+		t.Category = "categoria update"
+		t.Date = time.Now().UTC()
+		t.UserID = 3
+		err := repo.UpdateTransactionByID(1, t)
+		s.Assert().Nil(err)
+		res, err := repo.ReadTransactionByID(1)
+		s.Assert().Nil(err)
+		s.Assert().Equal(t, res)
+	})
+}
+
+func (s *TransactionRepoSuite) TestDeleteTransactionByID() {
+	repo := NewTransactionRepositoryPSQL(s.db)
+	err := repo.DeleteTransactionByID(1)
 	s.Assert().Nil(err)
-	s.Assert().Equal(t.ID, res.ID)
-	s.Assert().Equal(t.Value, res.Value)
-	s.Assert().Equal(t.Description, res.Description)
+
+	t, err := repo.ReadTransactionByID(1)
+	s.Assert().Nil(t)
+	s.Assert().Error(err)
 }

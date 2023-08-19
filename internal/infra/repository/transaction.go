@@ -36,14 +36,20 @@ func (r *TransactionRepositoryPSQL) ReadTransactionByID(id uint) (*entity.Transa
 	return t, nil
 }
 
-func (r *TransactionRepositoryPSQL) UpdateTransactionByID(id uint, t *entity.Transaction) (*entity.Transaction, error) {
-	r.Instance.Update()
-
-	return nil, nil
+func (r *TransactionRepositoryPSQL) UpdateTransactionByID(id uint, t *entity.Transaction) error {
+	res := r.Instance.UpdateColumns(&t)
+	if res.Error != nil {
+		return res.Error
+	}
+	return nil
 }
 
-func (r *TransactionRepositoryPSQL) DeleteTransactionByID(id uint) (uint, error) {
-	return 0, nil
+func (r *TransactionRepositoryPSQL) DeleteTransactionByID(id uint) error {
+	res := r.Instance.Delete(entity.Transaction{}, id)
+	if res.Error != nil {
+		return res.Error
+	}
+	return nil
 }
 
 func (r *TransactionRepositoryPSQL) ReadTransactionsPagination(limit, cursos int) ([]*entity.Transaction, error) {
