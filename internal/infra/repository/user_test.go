@@ -71,6 +71,7 @@ func (s *UserRepoSuite) TestReadUserByID() {
 func (s *UserRepoSuite) TestUpdateUserByID() {
 	user1, err := s.repo.ReadUserByID(1)
 	s.Assert().Nil(err)
+
 	user1.Name = "Gabriel"
 	user1.Password = "*Chama789"
 

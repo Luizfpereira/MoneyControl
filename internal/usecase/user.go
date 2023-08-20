@@ -43,3 +43,35 @@ func (u *UserUsecase) CreateUser(userInput *entity.User) (*UserOutputDTO, error)
 	}
 	return toUserOutputDTO(userInput, res), nil
 }
+
+func (u *UserUsecase) ReadUserByID(id int) (*UserOutputDTO, error) {
+	user, err := u.UserGateway.ReadUserByID(id)
+	if err != nil {
+		return nil, err
+	}
+	return toUserOutputDTO(user, uint(id)), nil
+}
+
+func (u *UserUsecase) UpdateUser(user *entity.User) error {
+	storedUser, err := u.UserGateway.ReadUserByID(int(user.ID))
+	if err != nil {
+		return err
+	}
+	userToUpdate := entity.User{
+		ID:   storedUser.ID,
+		Name: user.Name,
+	}
+	err = u.UserGateway.UpdateUser(&userToUpdate)
+	if err != nil {
+		return err
+	}
+	return nil
+}
+
+func (u *UserUsecase) DeleteUserByID(id int) error {
+	err := u.UserGateway.DeleteUserByID(id)
+	if err != nil {
+		return err
+	}
+	return nil
+}

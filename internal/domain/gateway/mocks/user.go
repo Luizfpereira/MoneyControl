@@ -79,12 +79,11 @@ func (mr *MockUserGatewayMockRecorder) ReadUserByID(id interface{}) *gomock.Call
 }
 
 // UpdateUser mocks base method.
-func (m *MockUserGateway) UpdateUser(user *entity.User) (*entity.User, error) {
+func (m *MockUserGateway) UpdateUser(user *entity.User) error {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "UpdateUser", user)
-	ret0, _ := ret[0].(*entity.User)
-	ret1, _ := ret[1].(error)
-	return ret0, ret1
+	ret0, _ := ret[0].(error)
+	return ret0
 }
 
 // UpdateUser indicates an expected call of UpdateUser.
